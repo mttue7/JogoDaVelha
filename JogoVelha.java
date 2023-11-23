@@ -12,14 +12,17 @@ public class JogoVelha {
 
         impressao.printboard(board);
 
-        while(true){
-        Movimento.PlayerTurn(board, scanner);
-        System.out.print("\nSUA JOGADA\n\n");
-        impressao.printboard(board);
-        System.out.println(" ------------------- \n");
-        System.out.println("JOGADA DO OPONENTE \n");
-        Movimento.computerTurn(board);
-        impressao.printboard(board);        
+        while (true) {
+            Movimento.PlayerTurn(board, scanner);
+          if( Movimento.jogoTerminado(board)){
+            break;
+          }
+       
+            System.out.print("\nSUA JOGADA\n\n");
+            impressao.printboard(board);
+            Movimento.computerTurn(board);
+            impressao.printboard(board);
+        }
+        // scanner.close();
     }
-    // scanner.close();
-}}
+}

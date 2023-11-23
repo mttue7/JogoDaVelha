@@ -18,14 +18,29 @@ public class Movimento {
                     inputValido = true;
                     break;
 
-                } else{
-                        System.out.println("Este espaço já está ocupado!");
+                } else {
+                    System.out.println("Este espaço já está ocupado!");
 
-                  }
-                }else {
+                }
+            } else {
                 System.out.println("\nPosição inválida. Digite um número de 1 a 9.");
             }
         }
+    }
+
+    public static boolean jogoTerminado(char[][] board) {
+
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == ' ') {
+                    return false;
+                }
+            }
+        }
+        impressao.printboard(board);
+        System.out.println("\nO jogo foi finalizado em empate!");
+        return true;
+        
     }
 
     private static boolean isValidInput(String input) {
@@ -39,6 +54,8 @@ public class Movimento {
 
     public static void computerTurn(char[][] board) {
 
+        System.out.println(" ------------------- \n");
+        System.out.println("JOGADA DO OPONENTE \n");
         Random rand = new Random();
         int ComputerPlay;
         while (true) {
