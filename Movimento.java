@@ -1,22 +1,21 @@
+import java.util.Random;
 import java.util.Scanner;
 
-public class VezJogador {
-    public static void PlayerTurn(char[][] board) {
-        Scanner scanner = new Scanner(System.in);
+public class Movimento {
+    public static void PlayerTurn(char[][] board, Scanner scanner) {
 
         boolean inputValido = false;
         while (!inputValido) {
-            System.out.println("Onde quer jogar?");
+            System.out.print("\nOnde quer jogar?\nResposta: ");
             String userInput = scanner.nextLine();
 
             if (isValidInput(userInput)) {
                 placeMove(board, userInput, 'X');
                 inputValido = true;
             } else {
-                System.out.println("Posição inválida. Digite um número de 1 a 9.");
+                System.out.println("\nPosição inválida. Digite um número de 1 a 9.");
             }
         }
-        scanner.close();
     }
 
     private static boolean isValidInput(String input) {
@@ -25,6 +24,56 @@ public class VezJogador {
             return posicao >= 1 && posicao <= 9;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+     public static void computerTurn(char[][] board){
+          
+ Random rand = new Random(); 
+ int ComputerPlay;
+ while (true) {
+      ComputerPlay = rand.nextInt(9) + 1;
+     if(EspacoVazio(board, ComputerPlay)){
+         break;
+     }
+ }
+
+ placeMove(board, Integer.toString(ComputerPlay), 'O');
+
+    }
+
+    private static boolean EspacoVazio(char[][] board, int posicao) {
+
+        switch (posicao) {
+            case 1:
+                return (board[0][0] == ' ');
+
+            case 2:
+                return (board[0][1] == ' ');
+
+            case 3:
+                return (board[0][2] == ' ');
+
+            case 4:
+                return (board[1][0] == ' ');
+
+            case 5:
+                return (board[1][1] == ' ');
+
+            case 6:
+                return (board[1][2] == ' ');
+
+            case 7:
+                return (board[2][0] == ' ');
+
+            case 8:
+                return (board[2][1] == ' ');
+
+            case 9:
+                return (board[2][2] == ' ');
+
+            default:
+                return true;
         }
     }
 
