@@ -3,16 +3,26 @@ import java.util.Scanner;
 
 public class Movimento {
     public static void PlayerTurn(char[][] board, Scanner scanner) {
-
+        String userInput;
         boolean inputValido = false;
         while (!inputValido) {
+
             System.out.print("\nOnde quer jogar?\nResposta: ");
-            String userInput = scanner.nextLine();
+            userInput = scanner.nextLine();
 
             if (isValidInput(userInput)) {
-                placeMove(board, userInput, 'X');
-                inputValido = true;
-            } else {
+                int posicao = Integer.parseInt(userInput);
+
+                if (EspacoVazio(board, posicao)) {
+                    placeMove(board, userInput, 'X');
+                    inputValido = true;
+                    break;
+
+                } else{
+                        System.out.println("Este espaço já está ocupado!");
+
+                  }
+                }else {
                 System.out.println("\nPosição inválida. Digite um número de 1 a 9.");
             }
         }
@@ -27,22 +37,22 @@ public class Movimento {
         }
     }
 
-     public static void computerTurn(char[][] board){
-          
- Random rand = new Random(); 
- int ComputerPlay;
- while (true) {
-      ComputerPlay = rand.nextInt(9) + 1;
-     if(EspacoVazio(board, ComputerPlay)){
-         break;
-     }
- }
+    public static void computerTurn(char[][] board) {
 
- placeMove(board, Integer.toString(ComputerPlay), 'O');
+        Random rand = new Random();
+        int ComputerPlay;
+        while (true) {
+            ComputerPlay = rand.nextInt(9) + 1;
+            if (EspacoVazio(board, ComputerPlay)) {
+                break;
+            }
+        }
+
+        placeMove(board, Integer.toString(ComputerPlay), 'O');
 
     }
 
-    private static boolean EspacoVazio(char[][] board, int posicao) {
+    static boolean EspacoVazio(char[][] board, int posicao) {
 
         switch (posicao) {
             case 1:

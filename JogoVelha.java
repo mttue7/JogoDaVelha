@@ -6,7 +6,6 @@ public class JogoVelha {
 
         Scanner scanner = new Scanner(System.in);
 
-
         char[][] board = { { ' ', ' ', ' ' },
                 { ' ', ' ', ' ' },
                 { ' ', ' ', ' ' } };
@@ -20,9 +19,7 @@ public class JogoVelha {
         System.out.println(" ------------------- \n");
         System.out.println("JOGADA DO OPONENTE \n");
         Movimento.computerTurn(board);
-        impressao.printboard(board);
-        }
-        
+        impressao.printboard(board);        
     }
     // scanner.close();
-}
+}}
