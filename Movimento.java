@@ -7,7 +7,7 @@ public class Movimento {
         boolean inputValido = false;
         while (!inputValido) {
 
-            System.out.print("\nOnde quer jogar?\nResposta: ");
+            System.out.print("Onde quer jogar?\nResposta: ");
             userInput = scanner.nextLine();
 
             if (isValidInput(userInput)) {
@@ -28,7 +28,35 @@ public class Movimento {
         }
     }
 
+    private static boolean hasContestantWon(char[][] board, char symbol) {
+		if ((board[0][0] == symbol && board [0][1] == symbol && board [0][2] == symbol) ||
+			(board[1][0] == symbol && board [1][1] == symbol && board [1][2] == symbol) ||
+			(board[2][0] == symbol && board [2][1] == symbol && board [2][2] == symbol) ||
+			
+			(board[0][0] == symbol && board [1][0] == symbol && board [2][0] == symbol) ||
+			(board[0][1] == symbol && board [1][1] == symbol && board [2][1] == symbol) ||
+			(board[0][2] == symbol && board [1][2] == symbol && board [2][2] == symbol) ||
+			
+			(board[0][0] == symbol && board [1][1] == symbol && board [2][2] == symbol) ||
+			(board[0][2] == symbol && board [1][1] == symbol && board [2][0] == symbol) ) {
+			return true;
+		}
+		return false;
+	}
+
     public static boolean jogoTerminado(char[][] board) {
+
+        if (hasContestantWon(board, 'X')) {	
+			impressao.printboard(board);
+			System.out.println("\nVitória do jogador!");
+			return true;
+		}
+		
+		if (hasContestantWon(board, 'O')) {	
+			impressao.printboard(board);
+			System.out.println("\nVitória do oponente!");
+			return true;
+		}
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -54,7 +82,6 @@ public class Movimento {
 
     public static void computerTurn(char[][] board) {
 
-        System.out.println(" ------------------- \n");
         System.out.println("JOGADA DO OPONENTE \n");
         Random rand = new Random();
         int ComputerPlay;
